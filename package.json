@@ -2,9 +2,9 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "main": "gendif.js",
+  "main": "./bin/genDiff.js",
   "bin": {
-    "gendiff": "./gendiff.js"
+    "gendiff": "./index.js"
   },
   "description": "[![Actions Status](https://github.com/akulistus/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/akulistus/frontend-project-46/actions)",
   "scripts": {
