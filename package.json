@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "main": "gendif.js",
+  "bin": {
+    "gendiff": "./gendiff.js"
+  },
   "description": "[![Actions Status](https://github.com/akulistus/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/akulistus/frontend-project-46/actions)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
