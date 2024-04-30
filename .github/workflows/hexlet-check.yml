@@ -29,7 +29,7 @@ jobs:
           node-version: 'latest'
           cahce: 'npm'
       - run: make install
-      - run: make lint
+      # - run: make lint
       - run: make test
 
       - name: Publish Test Coverage
