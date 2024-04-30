@@ -8,7 +8,7 @@
   },
   "description": "[![Actions Status](https://github.com/akulistus/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/akulistus/frontend-project-46/actions)",
   "scripts": {
-    "test": "npx jest --watch"
+    "test": "npx jest"
   },
   "author": "",
   "license": "ISC",
