@@ -16,6 +16,8 @@ const getFormatedString = (diffObject) => {
         return `  - ${property.key}: ${property.oldValue}\n  + ${property.key}: ${property.newValue}`;
       case TYPE.UNCHANGED:
         return `    ${property.key}: ${property.oldValue}`;
+      default:
+        throw new Error('Not Implemented');
     }
   });
 
