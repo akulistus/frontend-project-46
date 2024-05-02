@@ -2,7 +2,7 @@ const getDiffObject = (obj1, obj2) => {
   const objProps1 = new Set(Object.keys(obj1));
   const objProps2 = new Set(Object.keys(obj2));
   const props = new Set([...objProps1, ...objProps2]);
-  const diffObject = Array.from(props).map((property) => {
+  const diffObject = Array.from(props).sort().map((property) => {
     const oldValue = obj1[property];
     const newValue = obj2[property];
     if (!Object.hasOwn(obj2, property)) {
@@ -17,6 +17,13 @@ const getDiffObject = (obj1, obj2) => {
         type: 'added',
         key: [property],
         newValue,
+      };
+    }
+    if ((typeof oldValue === 'object' && oldValue !== null) && (typeof newValue === 'object' && newValue !== null)) {
+      return {
+        type: 'nested',
+        key: [property],
+        value: getDiffObject(oldValue, newValue),
       };
     }
     if (oldValue === newValue) {

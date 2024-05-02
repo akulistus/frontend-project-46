@@ -1,30 +1,22 @@
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import { readFileSync } from 'node:fs';
 import genDiff from '../bin/genDiff.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-let file1;
-let file2;
-let resultDiff;
+const readFile = (filepath) => readFileSync(filepath, 'utf-8');
 
 test.each([
-  { ext: 'json' },
-  { ext: 'yaml' },
-])('test genDiff', ({ ext }) => {
+  { ext: 'json', result: 'all/allStylishResult.txt' },
+  { ext: 'yaml', result: 'all/allStylishResult.txt' },
+])('test genDiff', ({ ext, result }) => {
   // ALL
-  file1 = getFixturePath(`all/allPlainFile1.${ext}`);
-  file2 = getFixturePath(`all/allPlainFile2.${ext}`);
-  const result = `{
-    host: hexlet.io
-  - timeout: 50
-  + timeout: 20
-  - proxy: 123.234.53.22
-  - follow: false
-  + verbose: true
-}`;
-  resultDiff = genDiff(file1, file2);
-  expect(resultDiff).toEqual(result);
+  const file1 = getFixturePath(`all/allStylishFile1.${ext}`);
+  const file2 = getFixturePath(`all/allStylishFile2.${ext}`);
+  const expectdResult = readFile(getFixturePath(result));
+  const actualResult = genDiff(file1, file2);
+  expect(actualResult).toEqual(expectdResult);
 });
