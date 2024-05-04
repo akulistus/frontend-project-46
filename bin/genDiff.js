@@ -1,6 +1,6 @@
 import readFile from '../src/readFile.js';
 import getDiffObject from '../src/getDiffObject.js';
-import getFormatter from '../src/formatters/getFormatter.js';
+import getFormatter from '../src/formatters/index.js';
 
 const genDiff = (filepath1, filepath2, format) => {
   const fileObj1 = readFile(filepath1);

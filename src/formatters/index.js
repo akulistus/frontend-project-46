@@ -1,10 +1,10 @@
 import applyStylishFormatter from './stylish.js';
-import getFormatedString from './getFormatedString.js';
+import applyPlainFormatter from './plain.js';
 
 const getFormatter = (formatter = 'stylish') => {
   switch (formatter) {
     case 'plain':
-      return getFormatedString;
+      return applyPlainFormatter;
     case 'stylish':
       return applyStylishFormatter;
     default:
