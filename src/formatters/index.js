@@ -7,6 +7,8 @@ const getFormatter = (formatter = 'stylish') => {
       return applyPlainFormatter;
     case 'stylish':
       return applyStylishFormatter;
+    case 'json':
+      return JSON.stringify;
     default:
       throw new Error('Not Implemented');
   }

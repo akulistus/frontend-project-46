@@ -18,8 +18,8 @@ const stringify = (property, value, symbol, depth) => {
 };
 
 const applyStylishFormatter = (diffObject) => {
-  const iter = (diffObject, depth) => {
-    const result = diffObject.map((property) => {
+  const iter = (Object, depth) => {
+    const result = Object.map((property) => {
       switch (property.type) {
         case TYPE.ADDED:
           return stringify(property.key, property.newValue, '  + ', depth);

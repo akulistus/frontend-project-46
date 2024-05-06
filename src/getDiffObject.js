@@ -41,6 +41,13 @@ const getDiffObject = (obj1, obj2) => {
         newValue,
       };
     }
+
+    return {
+      type: 'undefinde action',
+      key: [property],
+      oldValue,
+      newValue,
+    };
   });
 
   return diffObject;

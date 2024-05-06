@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import path, { dirname, format } from 'path';
+import path, { dirname } from 'path';
 import { readFileSync } from 'node:fs';
 import genDiff from '../bin/genDiff.js';
 
@@ -10,14 +10,16 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filepath) => readFileSync(filepath, 'utf-8');
 
 test.each([
-  { ext: 'json', result: 'all/allStylishResult.txt', format: 'stylish' },
-  { ext: 'yaml', result: 'all/allStylishResult.txt', format: 'stylish' },
-  { ext: 'yaml', result: 'all/allPlainResult.txt', format: 'plain' },
-  { ext: 'json', result: 'all/allPlainResult.txt', format: 'plain' },
+  { ext: 'json', result: 'StylishResult.txt', format: 'stylish' },
+  { ext: 'yaml', result: 'StylishResult.txt', format: 'stylish' },
+  { ext: 'yaml', result: 'PlainResult.txt', format: 'plain' },
+  { ext: 'json', result: 'PlainResult.txt', format: 'plain' },
+  { ext: 'json', result: 'JsonResult.txt', format: 'json' },
+  { ext: 'yaml', result: 'JsonResult.txt', format: 'json' },
 ])('test genDiff', ({ ext, result, format }) => {
   // ALL
-  const file1 = getFixturePath(`all/allStylishFile1.${ext}`);
-  const file2 = getFixturePath(`all/allStylishFile2.${ext}`);
+  const file1 = getFixturePath(`File1.${ext}`);
+  const file2 = getFixturePath(`File2.${ext}`);
   const expectdResult = readFile(getFixturePath(result));
   const actualResult = genDiff(file1, file2, format);
   expect(actualResult).toEqual(expectdResult);
