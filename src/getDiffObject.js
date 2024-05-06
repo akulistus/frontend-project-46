@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const getDiffObject = (obj1, obj2) => {
   const objProps1 = new Set(Object.keys(obj1));
