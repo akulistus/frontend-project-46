@@ -11,3 +11,6 @@
 
 # DemoPlain
 [![asciicast](https://asciinema.org/a/VC3x3wr0YkrXJLIl9aIPNsoEF.svg)](https://asciinema.org/a/VC3x3wr0YkrXJLIl9aIPNsoEF)
+
+# DemoJson
+[![asciicast](https://asciinema.org/a/ikFsEutF1Syz2yy3qooFi2lEi.svg)](https://asciinema.org/a/ikFsEutF1Syz2yy3qooFi2lEi)
