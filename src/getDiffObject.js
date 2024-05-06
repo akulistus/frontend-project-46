@@ -1,8 +1,10 @@
+import _ from "lodash";
+
 const getDiffObject = (obj1, obj2) => {
   const objProps1 = new Set(Object.keys(obj1));
   const objProps2 = new Set(Object.keys(obj2));
   const props = new Set([...objProps1, ...objProps2]);
-  const diffObject = Array.from(props).sort().map((property) => {
+  const diffObject = _.sortBy(Array.from(props)).map((property) => {
     const oldValue = obj1[property];
     const newValue = obj2[property];
     if (!Object.hasOwn(obj2, property)) {

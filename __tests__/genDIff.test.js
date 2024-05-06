@@ -16,7 +16,7 @@ test.each([
   { ext: 'json', result: 'PlainResult.txt', format: 'plain' },
   { ext: 'json', result: 'JsonResult.txt', format: 'json' },
   { ext: 'yaml', result: 'JsonResult.txt', format: 'json' },
-])('test genDiff', ({ ext, result, format }) => {
+])('genDiff', ({ ext, result, format }) => {
   // ALL
   const file1 = getFixturePath(`File1.${ext}`);
   const file2 = getFixturePath(`File2.${ext}`);
