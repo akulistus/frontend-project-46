@@ -1,11 +1,3 @@
-const TYPE = {
-  ADDED: 'added',
-  DELETED: 'deleted',
-  CHANGED: 'changed',
-  UNCHANGED: 'unchanged',
-  NESTED: 'nested',
-};
-
 const stringify = (value) => {
   if (typeof value === 'string') {
     return `'${value}'`;
@@ -17,19 +9,19 @@ const stringify = (value) => {
 };
 
 const applyPlainFormatter = (diffObject) => {
-  const iter = (Object, parentProperty = '') => {
-    const result = Object
-      .filter((property) => property.type !== TYPE.UNCHANGED)
+  const iter = (diffObject, parentProperty = '') => {
+    const result = diffObject
+      .filter((property) => property.type !== 'unchanged')
       .map((property) => {
         const key = [parentProperty, property.key].filter((item) => item !== '').join('.');
         switch (property.type) {
-          case TYPE.ADDED:
-            return `Property '${key}' was added with value: ${stringify(property.newValue)}`;
-          case TYPE.DELETED:
+          case 'added':
+            return `Property '${key}' was added with value: ${stringify(property.value)}`;
+          case 'deleted':
             return `Property '${key}' was removed`;
-          case TYPE.CHANGED:
-            return `Property '${key}' was updated. From ${stringify(property.oldValue)} to ${stringify(property.newValue)}`;
-          case TYPE.NESTED:
+          case 'changed':
+            return `Property '${key}' was updated. From ${stringify(property.value1)} to ${stringify(property.value2)}`;
+          case 'nested':
             return iter(property.value, key);
           default:
             throw new Error('Not Implemented');

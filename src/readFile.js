@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs';
-import getFileParser from './parsers.js';
+import path from 'path';
+import getDataParser from './parsers.js';
 
 const readFile = (filepath) => {
   const file = readFileSync(filepath, 'utf-8');
-  const parser = getFileParser(filepath);
+  const dataType = path.extname(filepath).slice(1);
+  const parser = getDataParser(dataType);
   const parsedFile = parser(file);
   return parsedFile;
 };

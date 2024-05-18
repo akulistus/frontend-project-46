@@ -1,11 +1,3 @@
-const TYPE = {
-  ADDED: 'added',
-  DELETED: 'deleted',
-  CHANGED: 'changed',
-  UNCHANGED: 'unchanged',
-  NESTED: 'nested',
-};
-
 const getIndent = (depth) => '    '.repeat(depth);
 
 const stringify = (property, value, symbol, depth) => {
@@ -18,18 +10,18 @@ const stringify = (property, value, symbol, depth) => {
 };
 
 const applyStylishFormatter = (diffObject) => {
-  const iter = (Object, depth) => {
-    const result = Object.map((property) => {
+  const iter = (diffObject, depth) => {
+    const result = diffObject.map((property) => {
       switch (property.type) {
-        case TYPE.ADDED:
-          return stringify(property.key, property.newValue, '  + ', depth);
-        case TYPE.DELETED:
-          return stringify(property.key, property.oldValue, '  - ', depth);
-        case TYPE.CHANGED:
-          return `${stringify(property.key, property.oldValue, '  - ', depth)}\n${stringify(property.key, property.newValue, '  + ', depth)}`;
-        case TYPE.UNCHANGED:
-          return stringify(property.key, property.oldValue, '    ', depth);
-        case TYPE.NESTED:
+        case 'added':
+          return stringify(property.key, property.value, '  + ', depth);
+        case 'deleted':
+          return stringify(property.key, property.value, '  - ', depth);
+        case 'changed':
+          return `${stringify(property.key, property.value1, '  - ', depth)}\n${stringify(property.key, property.value2, '  + ', depth)}`;
+        case 'unchanged':
+          return stringify(property.key, property.value, '    ', depth);
+        case 'nested':
           // fix somehow...
           return `${getIndent(depth)}    ${property.key}: {\n${iter(property.value, depth + 1).join('\n')}\n${getIndent(depth)}    }`;
         default:

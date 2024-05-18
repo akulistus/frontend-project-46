@@ -1,52 +1,51 @@
 import _ from 'lodash';
 
-const getDiffObject = (obj1, obj2) => {
-  const objProps1 = new Set(Object.keys(obj1));
-  const objProps2 = new Set(Object.keys(obj2));
-  const props = new Set([...objProps1, ...objProps2]);
-  const diffObject = _.sortBy(Array.from(props)).map((property) => {
-    const oldValue = obj1[property];
-    const newValue = obj2[property];
-    if (!Object.hasOwn(obj2, property)) {
+const getDiffObject = (content1, content2) => {
+  const props = _.union(_.keys(content1), _.keys(content2));
+  const diffObject = _.sortBy(props).map((property) => {
+    if (!Object.hasOwn(content2, property)) {
       return {
         type: 'deleted',
-        key: [property],
-        oldValue,
+        key: property,
+        value: content1[property],
       };
     }
-    if (!Object.hasOwn(obj1, property)) {
+    if (!Object.hasOwn(content1, property)) {
       return {
         type: 'added',
-        key: [property],
-        newValue,
+        key: property,
+        value: content2[property],
       };
     }
-    if ((typeof oldValue === 'object' && oldValue !== null) && (typeof newValue === 'object' && newValue !== null)) {
+
+    const value1 = content1[property];
+    const value2 = content2[property];
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return {
         type: 'nested',
-        key: [property],
-        value: getDiffObject(oldValue, newValue),
+        key: property,
+        value: getDiffObject(value1, value2),
       };
     }
-    if (oldValue === newValue) {
+    if (_.isEqual(value1, value2)) {
       return {
         type: 'unchanged',
-        key: [property],
-        oldValue,
+        key: property,
+        value: value1,
       };
     }
-    if (oldValue !== newValue) {
+    if (!_.isEqual(value1, value2)) {
       return {
         type: 'changed',
-        key: [property],
-        oldValue,
-        newValue,
+        key: property,
+        value1,
+        value2,
       };
     }
 
     return {
       type: 'undefinde action',
-      key: [property],
+      key: property,
       oldValue,
       newValue,
     };

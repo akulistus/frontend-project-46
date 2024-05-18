@@ -1,17 +1,17 @@
 import applyStylishFormatter from './stylish.js';
 import applyPlainFormatter from './plain.js';
 
-const getFormatter = (formatter = 'stylish') => {
+const formatDiff = (data, formatter = 'stylish') => {
   switch (formatter) {
     case 'plain':
-      return applyPlainFormatter;
+      return applyPlainFormatter(data);
     case 'stylish':
-      return applyStylishFormatter;
+      return applyStylishFormatter(data);
     case 'json':
-      return JSON.stringify;
+      return JSON.stringify(data);
     default:
       throw new Error('Not Implemented');
   }
 };
 
-export default getFormatter;
+export default formatDiff;
