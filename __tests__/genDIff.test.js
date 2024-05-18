@@ -16,7 +16,7 @@ test.each([
   { ext: 'json', result: 'plainResult.txt', format: 'plain' },
   { ext: 'json', result: 'jsonResult.txt', format: 'json' },
   { ext: 'yaml', result: 'jsonResult.txt', format: 'json' },
-  { ext: 'yaml', result: 'stylishResult.txt'}
+  { ext: 'yaml', result: 'stylishResult.txt' },
 ])('genDiff', ({ ext, result, format }) => {
   // ALL
   const file1 = getFixturePath(`File1.${ext}`);

@@ -1,25 +1,25 @@
 import _ from 'lodash';
 
-const getDiffObject = (content1, content2) => {
-  const props = _.union(_.keys(content1), _.keys(content2));
+const getDiffObject = (data1, data2) => {
+  const props = _.union(_.keys(data1), _.keys(data2));
   const diffObject = _.sortBy(props).map((property) => {
-    if (!Object.hasOwn(content2, property)) {
+    if (!Object.hasOwn(data2, property)) {
       return {
         type: 'deleted',
         key: property,
-        value: content1[property],
+        value: data1[property],
       };
     }
-    if (!Object.hasOwn(content1, property)) {
+    if (!Object.hasOwn(data1, property)) {
       return {
         type: 'added',
         key: property,
-        value: content2[property],
+        value: data2[property],
       };
     }
 
-    const value1 = content1[property];
-    const value2 = content2[property];
+    const value1 = data1[property];
+    const value2 = data2[property];
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return {
         type: 'nested',
@@ -42,12 +42,11 @@ const getDiffObject = (content1, content2) => {
         value2,
       };
     }
-
     return {
-      type: 'undefinde action',
+      type: 'Undefinde action',
       key: property,
-      oldValue,
-      newValue,
+      value1,
+      value2,
     };
   });
 
