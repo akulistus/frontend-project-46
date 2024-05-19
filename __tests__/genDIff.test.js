@@ -19,8 +19,8 @@ test.each([
   { ext: 'yaml', result: 'stylishResult.txt' },
 ])('genDiff', ({ ext, result, format }) => {
   // ALL
-  const file1 = getFixturePath(`File1.${ext}`);
-  const file2 = getFixturePath(`File2.${ext}`);
+  const file1 = getFixturePath(`file1.${ext}`);
+  const file2 = getFixturePath(`file2.${ext}`);
   const expectdResult = readFile(getFixturePath(result));
   const actualResult = genDiff(file1, file2, format);
   expect(actualResult).toEqual(expectdResult);
