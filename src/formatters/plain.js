@@ -28,7 +28,6 @@ const applyPlainFormatter = (diffObject) => {
             throw new Error(`Unknown action: \nKey:'${property.key}'\nValue1:'${property.value1}'\nValue2:'${property.value2}'`);
         }
       });
-    console.log(result);
     return result.filter((item) => item !== undefined).join('\n');
   };
 
