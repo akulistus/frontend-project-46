@@ -6,7 +6,7 @@
   "bin": {
     "gendiff": "./bin/index.js"
   },
-  "description": "[![Actions Status](https://github.com/akulistus/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/akulistus/frontend-project-46/actions)",
+  "description": "A 'Diff' utility that comapares two sets of data generating console output",
   "scripts": {
     "test": "npx jest"
   },

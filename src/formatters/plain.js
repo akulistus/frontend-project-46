@@ -11,29 +11,25 @@ const stringify = (value) => {
 const applyPlainFormatter = (diffObject) => {
   const iter = (diffContent, parentProperty = '') => {
     const result = diffContent
-      .reduce((acc, property) => {
+      .map((property) => {
         const key = [parentProperty, property.key].filter((item) => item !== '').join('.');
         switch (property.type) {
           case 'added':
-            acc.push(`Property '${key}' was added with value: ${stringify(property.value)}`);
-            break;
+            return `Property '${key}' was added with value: ${stringify(property.value)}`;
           case 'deleted':
-            acc.push(`Property '${key}' was removed`);
-            break;
+            return `Property '${key}' was removed`;
           case 'changed':
-            acc.push(`Property '${key}' was updated. From ${stringify(property.value1)} to ${stringify(property.value2)}`);
-            break;
+            return `Property '${key}' was updated. From ${stringify(property.value1)} to ${stringify(property.value2)}`;
           case 'nested':
-            acc.push(iter(property.value, key));
-            break;
+            return iter(property.value, key);
           case 'unchanged':
-            break;
+            return undefined;
           default:
             throw new Error(`Unknown action: \nKey:'${property.key}'\nValue1:'${property.value1}'\nValue2:'${property.value2}'`);
         }
-        return acc;
-      }, []);
-    return result.join('\n');
+      });
+    console.log(result);
+    return result.filter((item) => item !== undefined).join('\n');
   };
 
   return iter(diffObject);
